@@ -5,7 +5,7 @@ An **Explainable AI Dashboard for Energy Insights** — predicts building heatin
 - **ML Models**: Tuned Random Forest (Heating R² = 0.9973, Cooling R² = 0.9555)
 - **Explainability**: SHAP, LIME, feature importance, counterfactuals
 - **Advanced XAI**: Anomaly detection, design optimization, monthly load prediction
-- **Evaluation**: Heuristic + usability test plan in `EVALUATION.md`
+- **Evaluation**: Built-in 5-step questionnaire in the Questionnaire tab
 - **Tech Stack**: FastAPI + React + Recharts
 
 ## 🚀 Quick Start
@@ -52,9 +52,6 @@ Energy_Dashboard/
 │   └── package.json
 ├── train_models.py             # Model training script
 ├── start.bat                   # Windows startup script
-├── EVALUATION.md               # Evaluation + usability test plan
-├── dissertation.txt            # Project dissertation
-└── proposal.txt                # Project proposal
 ```
 
 ## 🔧 API Endpoints
@@ -146,7 +143,7 @@ Generates new artifacts in `backend/saved_models/` (downloads the UCI dataset if
 | Optimization recommendations | ✅ `/optimize` endpoint |
 | FastAPI backend | ✅ Auto-generated docs |
 | React frontend | ✅ Professional dashboard |
-| Usability evaluation | ✅ Heuristic + test plan in EVALUATION.md |
+| Usability evaluation | ✅ In-app 5-step questionnaire (Questionnaire tab) |
 
 ## 🐛 Troubleshooting
 
