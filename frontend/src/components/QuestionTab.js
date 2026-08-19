@@ -102,6 +102,20 @@ const REVIEWS = [
     review:
       'Very good interface, easy to use and navigate. The explanation panel helped me understand why the predictions change with different inputs. Overall an excellent project.',
   },
+  {
+    name: 'Tayyba Javed',
+    email: 'tjaulakh4936@gmail.com',
+    rating: 5,
+    review:
+      'I really liked the monthly prediction breakdown and how clearly the results are presented. The dashboard feels modern and everything responds quickly. Very impressive work!',
+  },
+  {
+    name: 'Nouman Khalid',
+    email: 'kangnomi3@gmail.com',
+    rating: 5,
+    review:
+      'The system is very well built. Prediction, explanations and the questionnaire all worked smoothly during my testing. A clean, professional and user-friendly experience overall.',
+  },
 ];
 
 const Stars = ({ count }) => (

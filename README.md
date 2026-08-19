@@ -70,23 +70,6 @@ Energy_Dashboard/
 | `/model/info` | GET | Model metadata (R² scores, features) |
 | `/questionnaire/submit` | POST | Save evaluation questionnaire response |
 
-### Example Request
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "Relative_Compactness": 0.85,
-    "Surface_Area": 550,
-    "Wall_Area": 300,
-    "Roof_Area": 120,
-    "Overall_Height": 5.0,
-    "Orientation": 3,
-    "Glazing_Area": 0.2,
-    "Glazing_Distribution": 2,
-    "Month": 1
-  }'
-```
-
 ## 🧠 Machine Learning Details
 
 ### Dataset
