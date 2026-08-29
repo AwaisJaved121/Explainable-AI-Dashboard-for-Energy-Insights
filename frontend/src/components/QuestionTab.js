@@ -199,7 +199,6 @@ const QuestionTab = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const answeredCount = Object.keys(ratings).length;
-  const [startQ, endQ] = stepQuestionRange(Math.max(step - 1, 0));
 
   const isStepComplete = () => {
     if (step === 0) return true;

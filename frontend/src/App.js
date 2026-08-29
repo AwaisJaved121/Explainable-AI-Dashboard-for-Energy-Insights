@@ -10,7 +10,6 @@ import AnomalyDetection from './components/AnomalyDetection';
 import CounterfactualAnalysis from './components/CounterfactualAnalysis';
 import OptimizationPanel from './components/OptimizationPanel';
 import QuestionTab from './components/QuestionTab';
-import FeatureImportanceChart from './components/FeatureImportanceChart';
 import ModelPerformance from './components/ModelPerformance';
 import PredictionAccuracy from './components/PredictionAccuracy';
 import './App.css';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from './ui/Card';
 import {
   XAxis, YAxis, CartesianGrid,
-  Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter, ReferenceLine
+  Tooltip, ResponsiveContainer, ScatterChart, Scatter, ReferenceLine
 } from 'recharts';
 
 const PredictionAccuracy = () => {

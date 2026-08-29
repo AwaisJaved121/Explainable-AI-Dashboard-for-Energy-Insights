@@ -1,0 +1,28 @@
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "installCommand": "echo 'root install skipped, frontend installs its own deps'",
+  "outputDirectory": "frontend/build",
+  "functions": {
+    "api/index.py": {
+      "includeFiles": "backend/saved_models/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/health", "destination": "/api/index" },
+    { "source": "/predict", "destination": "/api/index" },
+    { "source": "/predict/batch", "destination": "/api/index" },
+    { "source": "/explain", "destination": "/api/index" },
+    { "source": "/explain/batch", "destination": "/api/index" },
+    { "source": "/explain/shap", "destination": "/api/index" },
+    { "source": "/explain/lime", "destination": "/api/index" },
+    { "source": "/anomaly", "destination": "/api/index" },
+    { "source": "/counterfactual", "destination": "/api/index" },
+    { "source": "/optimize", "destination": "/api/index" },
+    { "source": "/feature-importance", "destination": "/api/index" },
+    { "source": "/template/csv", "destination": "/api/index" },
+    { "source": "/model/info", "destination": "/api/index" },
+    { "source": "/model/validation", "destination": "/api/index" },
+    { "source": "/questionnaire/submit", "destination": "/api/index" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

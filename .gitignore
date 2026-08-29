@@ -12,9 +12,9 @@ npm-debug.log*
 package-lock.json
 
 # ─── Model artifacts & data ───
-backend/saved_models/
-*.pkl
-*.joblib
+# backend/saved_models/ is committed on purpose: the Vercel serverless
+# backend loads these .pkl files at runtime and has no build step that
+# can regenerate them, so they must ship with the deployed source.
 data/
 *.csv
 *.xlsx

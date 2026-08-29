@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAuth } from '../context/AuthContext';
 
 const ROLE_STYLE = {
   manager: {
@@ -17,7 +16,6 @@ const ROLE_STYLE = {
 };
 
 const Header = ({ user, pageTitle = 'Energy XAI Dashboard' }) => {
-  const { logout } = useAuth();
   const roleStyle = ROLE_STYLE[user?.role] || ROLE_STYLE.engineer;
 
   return (

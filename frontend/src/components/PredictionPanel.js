@@ -246,7 +246,6 @@ const PredictionPanel = () => {
   /* chart bar values */
   const hLoad = prediction?.Monthly_Heating_Load ?? 0;
   const cLoad = prediction?.Monthly_Cooling_Load ?? 0;
-  const chartMax = Math.max(hLoad, cLoad, 30);
   /* realistic building energy profile:
      night low → morning ramp → 10am peak → lunch dip → 3pm peak → evening drop */
   const HOURLY_PROFILE = [

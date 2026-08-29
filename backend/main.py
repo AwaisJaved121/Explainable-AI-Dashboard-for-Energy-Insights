@@ -1153,7 +1153,15 @@ async def get_validation_data():
 
 
 # ─── Evaluation Questionnaire ───────────────────────────────────────────
-QUESTIONNAIRE_FILE = Path(__file__).parent / "questionnaire_responses.json"
+# Vercel's filesystem is read-only except /tmp, and /tmp is wiped between
+# invocations/instances, so responses only persist for the life of one
+# warm function instance there. Locally (no VERCEL env var) this still
+# writes next to the backend so responses accumulate across runs.
+QUESTIONNAIRE_FILE = (
+    Path("/tmp/questionnaire_responses.json")
+    if os.environ.get("VERCEL")
+    else Path(__file__).parent / "questionnaire_responses.json"
+)
 
 class QuestionnaireSubmit(BaseModel):
     participant_id: str = ""

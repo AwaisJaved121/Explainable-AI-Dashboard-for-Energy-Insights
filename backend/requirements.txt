@@ -7,9 +7,11 @@ joblib==1.3.2
 scikit-learn==1.3.2
 pandas==2.1.4
 numpy==1.26.3
-xgboost==2.0.3
 shap==0.44.0
 lime==0.2.0.1
 scipy==1.11.4
-statsmodels==0.14.1
 openpyxl==3.1.2
+
+# xgboost is only needed to retrain models via train_models.py, not to
+# serve backend/main.py — install it separately if you retrain.
+# statsmodels was listed but is unused by both main.py and train_models.py.
