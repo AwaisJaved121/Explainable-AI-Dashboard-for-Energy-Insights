@@ -1,28 +1,31 @@
 {
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "installCommand": "echo 'root install skipped, frontend installs its own deps'",
-  "outputDirectory": "frontend/build",
-  "functions": {
-    "api/index.py": {
-      "includeFiles": "backend/saved_models/**"
+  "services": {
+    "frontend": {
+      "root": "frontend/",
+      "buildCommand": "npm install && npm run build",
+      "outputDirectory": "build"
+    },
+    "backend": {
+      "root": "backend/",
+      "entrypoint": "main:app"
     }
   },
   "rewrites": [
-    { "source": "/health", "destination": "/api/index" },
-    { "source": "/predict", "destination": "/api/index" },
-    { "source": "/predict/batch", "destination": "/api/index" },
-    { "source": "/explain", "destination": "/api/index" },
-    { "source": "/explain/batch", "destination": "/api/index" },
-    { "source": "/explain/shap", "destination": "/api/index" },
-    { "source": "/explain/lime", "destination": "/api/index" },
-    { "source": "/anomaly", "destination": "/api/index" },
-    { "source": "/counterfactual", "destination": "/api/index" },
-    { "source": "/optimize", "destination": "/api/index" },
-    { "source": "/feature-importance", "destination": "/api/index" },
-    { "source": "/template/csv", "destination": "/api/index" },
-    { "source": "/model/info", "destination": "/api/index" },
-    { "source": "/model/validation", "destination": "/api/index" },
-    { "source": "/questionnaire/submit", "destination": "/api/index" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/health", "destination": { "service": "backend" } },
+    { "source": "/predict", "destination": { "service": "backend" } },
+    { "source": "/predict/batch", "destination": { "service": "backend" } },
+    { "source": "/explain", "destination": { "service": "backend" } },
+    { "source": "/explain/batch", "destination": { "service": "backend" } },
+    { "source": "/explain/shap", "destination": { "service": "backend" } },
+    { "source": "/explain/lime", "destination": { "service": "backend" } },
+    { "source": "/anomaly", "destination": { "service": "backend" } },
+    { "source": "/counterfactual", "destination": { "service": "backend" } },
+    { "source": "/optimize", "destination": { "service": "backend" } },
+    { "source": "/feature-importance", "destination": { "service": "backend" } },
+    { "source": "/template/csv", "destination": { "service": "backend" } },
+    { "source": "/model/info", "destination": { "service": "backend" } },
+    { "source": "/model/validation", "destination": { "service": "backend" } },
+    { "source": "/questionnaire/submit", "destination": { "service": "backend" } },
+    { "source": "/(.*)", "destination": { "service": "frontend" } }
   ]
 }
