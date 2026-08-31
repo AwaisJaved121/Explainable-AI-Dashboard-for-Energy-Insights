@@ -17,7 +17,6 @@
     { "source": "/explain", "destination": { "service": "backend" } },
     { "source": "/explain/batch", "destination": { "service": "backend" } },
     { "source": "/explain/shap", "destination": { "service": "backend" } },
-    { "source": "/explain/lime", "destination": { "service": "backend" } },
     { "source": "/anomaly", "destination": { "service": "backend" } },
     { "source": "/counterfactual", "destination": { "service": "backend" } },
     { "source": "/optimize", "destination": { "service": "backend" } },

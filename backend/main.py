@@ -104,14 +104,9 @@ class SHAPExplanation(BaseModel):
     shap_value: float
     feature_value: float
 
-class LIMEExplanation(BaseModel):
-    feature: str
-    weight: float
-
 class ExplanationResponse(BaseModel):
     feature_importance: List[FeatureImportance]
     shap_values: List[SHAPExplanation]
-    lime_explanation: List[LIMEExplanation]
 
 class AnomalyResponse(BaseModel):
     is_anomaly: bool
@@ -656,53 +651,6 @@ async def explain_shap(features: BuildingFeatures):
     
     return {"shap_values": explanations[:15]}  # Top 15
 
-# ─── LIME Explanations ─────────────────────────────────────────────────
-@app.post("/explain/lime")
-async def explain_lime(features: BuildingFeatures):
-    if best_rf_heat is None:
-        raise HTTPException(503, "Models not loaded")
-    
-    import lime.lime_tabular
-    
-    scaled, _ = encode_features(features)
-    
-    # Create LIME explainer (using training data distribution)
-    # We'll use a small synthetic background for speed
-    np.random.seed(42)
-    background = np.random.randn(200, len(FEATURES))
-    
-    explainer = lime.lime_tabular.LimeTabularExplainer(
-        background,
-        feature_names=FEATURES,
-        mode='regression',
-        verbose=False
-    )
-    
-    # Explain for heating
-    exp_heat = explainer.explain_instance(
-        scaled[0], best_rf_heat.predict, num_features=10
-    )
-    
-    # Explain for cooling
-    exp_cool = explainer.explain_instance(
-        scaled[0], best_rf_cool.predict, num_features=10
-    )
-    
-    # Combine explanations
-    lime_heat = dict(exp_heat.as_list())
-    lime_cool = dict(exp_cool.as_list())
-    
-    all_features = set(lime_heat.keys()) | set(lime_cool.keys())
-    combined = []
-    for feat in all_features:
-        combined.append(LIMEExplanation(
-            feature=feat,
-            weight=float((lime_heat.get(feat, 0) + lime_cool.get(feat, 0)) / 2)
-        ))
-    
-    combined.sort(key=lambda x: abs(x.weight), reverse=True)
-    return {"lime_explanation": combined[:10]}
-
 # ─── Full Explanation Endpoint ─────────────────────────────────────────
 @app.post("/explain", response_model=ExplanationResponse)
 async def explain_full(features: BuildingFeatures):
@@ -733,30 +681,10 @@ async def explain_full(features: BuildingFeatures):
         for i, f in enumerate(FEATURES)
     ]
     shap_list.sort(key=lambda x: abs(x.shap_value), reverse=True)
-    
-    # LIME
-    import lime.lime_tabular
-    np.random.seed(42)
-    background = np.random.randn(200, len(FEATURES))
-    explainer = lime.lime_tabular.LimeTabularExplainer(background, feature_names=FEATURES, mode='regression', verbose=False)
-    
-    exp_heat = explainer.explain_instance(scaled[0], best_rf_heat.predict, num_features=10)
-    exp_cool = explainer.explain_instance(scaled[0], best_rf_cool.predict, num_features=10)
-    
-    lime_heat = dict(exp_heat.as_list())
-    lime_cool = dict(exp_cool.as_list())
-    all_feats = set(lime_heat.keys()) | set(lime_cool.keys())
-    
-    lime_list = [
-        LIMEExplanation(feature=f, weight=float((lime_heat.get(f, 0) + lime_cool.get(f, 0)) / 2))
-        for f in all_feats
-    ]
-    lime_list.sort(key=lambda x: abs(x.weight), reverse=True)
-    
+
     return ExplanationResponse(
         feature_importance=fi_list[:15],
-        shap_values=shap_list[:15],
-        lime_explanation=lime_list[:10]
+        shap_values=shap_list[:15]
     )
 
 # ─── Anomaly Detection ─────────────────────────────────────────────────
